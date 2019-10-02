@@ -15,8 +15,9 @@ class WebsiteManager
     {
         $this->database = $database;
     }
-    
-    public function getById($websiteId) {
+
+    public function getById($websiteId)
+    {
         /** @var \PDOStatement $query */
         $query = $this->database->prepare('SELECT * FROM websites WHERE website_id = :id');
         $query->setFetchMode(\PDO::FETCH_CLASS, Website::class);
@@ -48,5 +49,29 @@ class WebsiteManager
         $statement->execute();
         return $this->database->lastInsertId();
     }
+    public function addVisitTimeWebsite($websiteId)
+    {
+        // $userId = $user->getUserId();
+        $timeNow = date('Y-m-d H:i:s');
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('UPDATE websites SET time_visit = :time_visit WHERE website_id = :website_id');
+        $query->bindParam(':website_id', $websiteId, \PDO::PARAM_INT);
+        $query->bindParam(':time_visit', $timeNow, \PDO::PARAM_STR);
+        $query->execute();
+        return $this->database->lastInsertId();
+    }
 
+    // public function addDataVisit(Website $website)
+    // {
+    //     var_dump("timeVisit pagemanager");
+    //     $time_visit = date('Y-m-d H:i:s');
+    //     $websiteId = $website->getWebsiteId();
+    //     var_dump($websiteId);
+    //     /** @var \PDOStatement $query */
+    //     $query = $this->database->prepare('UPDATE websites SET time_visit = :time_visit WHERE website_id = :website_id');
+    //     $query->bindParam(':website_id', $websiteId, \PDO::PARAM_INT);
+    //     $query->bindParam(':time_visit', $time_visit, \PDO::PARAM_STR);
+    //     $query->execute();
+    //     return $this->database->lastInsertId();
+    // }
 }

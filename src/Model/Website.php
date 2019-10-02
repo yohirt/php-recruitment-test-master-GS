@@ -9,6 +9,7 @@ class Website
     public $name;
     public $hostname;
     public $user_id;
+    public $time_visit;
 
     public function __construct()
     {
@@ -46,5 +47,8 @@ class Website
     public function getUserId()
     {
         return $this->user_id;
+    }
+    public function getTimeVisitWebsite(){
+        return $this->time_visit;
     }
 }

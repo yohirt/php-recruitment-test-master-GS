@@ -45,7 +45,8 @@ class WebsiteAction
                 $this->website = $website;
             }
         }
-
+        // $id - websiteId
+        $this->websiteManager->addVisitTimeWebsite($id);
         require __DIR__ . '/../view/website.phtml';
     }
 
