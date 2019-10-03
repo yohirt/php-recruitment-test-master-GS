@@ -34,6 +34,20 @@
             <h1>Cache Warmer</h1>
             <?php if ($this->user) : ?>
                 <p class="bg-success">Hello <?= $this->user->getDisplayName() ?>!</p>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Total number of pages associated with this user
+                        <span class="badge badge-primary badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Least recently visited page
+                        <span class="badge badge-primary badge-pill">2</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Most recently visited page
+                        <span class="badge badge-primary badge-pill">1</span>
+                    </li>
+                </ul>
 
                 <div class="padded">
                     <form class="form-inline" method="post" action="/website">
