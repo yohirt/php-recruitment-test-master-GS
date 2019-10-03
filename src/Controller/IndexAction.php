@@ -35,6 +35,12 @@ class IndexAction
         return [];
     }
 
+    //TODO Least recently visited page
+    public function getLeastRecentlyVisitedPage()
+    {
+        return $this->websiteManager->getLeastRecentlyVisitedPage($this->user);
+    }
+
     public function execute()
     {
         require __DIR__ . '/../view/index.phtml';

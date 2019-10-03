@@ -15,8 +15,9 @@ class WebsiteManager
     {
         $this->database = $database;
     }
-    
-    public function getById($websiteId) {
+
+    public function getById($websiteId)
+    {
         /** @var \PDOStatement $query */
         $query = $this->database->prepare('SELECT * FROM websites WHERE website_id = :id');
         $query->setFetchMode(\PDO::FETCH_CLASS, Website::class);
@@ -60,4 +61,43 @@ class WebsiteManager
         return $this->database->lastInsertId();
     }
 
+    public function countWebsitesByUser(User $user)
+    {
+        $userId = $user->getUserId();
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('SELECT count(*) FROM websites WHERE user_id = :id');
+        $query->bindParam(':id', $userId, \PDO::PARAM_INT);
+        $query->setFetchMode(\PDO::FETCH_CLASS, Website::class);
+        $query->execute();
+        /** @var Website $website */
+        $count = strval($query->fetchColumn());
+        return $count;
+    }
+    public function getLeastRecentlyVisitedPage(User $user)
+    {
+        $userId = $user->getUserId();
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('SELECT * FROM websites WHERE user_id = :id  ORDER BY time_visit_website ASC LIMIT 1');
+
+        $query->setFetchMode(\PDO::FETCH_CLASS, Website::class);
+        $query->bindParam(':id', $userId, \PDO::PARAM_INT);
+        $query->execute();
+        var_dump($query->errorInfo());
+        /** @var Website $website */
+        $website = $query->fetch(\PDO::FETCH_CLASS);
+        return $website;
+    }
+    public function getMostRecentlyVisitedPage(User $user)
+    {
+        $userId = $user->getUserId();
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('SELECT * FROM websites WHERE user_id = :id ORDER BY ASC');
+        $query->setFetchMode(\PDO::FETCH_CLASS, Website::class);
+        $query->bindParam(':id', $userId, \PDO::PARAM_INT);
+        $query->execute();
+        /** @var Website $website */
+        $result = $query->fetch();
+        var_dump($result);
+        return $query->fetch();
+    }
 }

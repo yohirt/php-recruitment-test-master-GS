@@ -36,6 +36,7 @@ class WarmCommand
             });
             $warmer = new \Old_Legacy_CacheWarmer_Warmer();
             $warmer->setResolver($resolver);
+            
             $warmer->setHostname($website->getHostname());
             $warmer->setActor($actor);
 

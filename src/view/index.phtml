@@ -34,7 +34,7 @@
             <h1>Cache Warmer</h1>
             <?php if ($this->user) : ?>
                 <p class="bg-success">Hello <?= $this->user->getDisplayName() ?>!</p>
-                
+
                 <div class="padded">
                     <form class="form-inline" method="post" action="/website">
                         <div class="form-group">
@@ -49,7 +49,7 @@
                     </form>
                 </div>
 
-
+                <?php var_dump($this->getLeastRecentlyVisitedPage());?>
                 <div class="padded">
                     <table class="table table-striped">
                         <tr>
