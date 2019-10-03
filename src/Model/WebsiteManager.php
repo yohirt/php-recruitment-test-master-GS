@@ -48,5 +48,16 @@ class WebsiteManager
         $statement->execute();
         return $this->database->lastInsertId();
     }
+    public function addVisitTimeWebsite($websiteId)
+    {
+        // $userId = $user->getUserId();
+        $timeNow = date('Y-m-d H:i:s');
+        /** @var \PDOStatement $query */
+        $query = $this->database->prepare('UPDATE websites SET time_visit_website = :time_visit WHERE website_id = :website_id');
+        $query->bindParam(':website_id', $websiteId, \PDO::PARAM_INT);
+        $query->bindParam(':time_visit', $timeNow, \PDO::PARAM_STR);
+        $query->execute();
+        return $this->database->lastInsertId();
+    }
 
 }

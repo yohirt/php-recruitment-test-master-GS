@@ -47,4 +47,8 @@ class Website
     {
         return $this->user_id;
     }
+    public function getTimeVisitWebsite()
+    {
+        return $this->time_visit_website;
+    }
 }
